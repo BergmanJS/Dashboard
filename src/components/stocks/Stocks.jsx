@@ -1,17 +1,18 @@
-import React, { useState, useEffect } from "react";
-import styled, { css } from "styled-components";
-import Summary from "./Summary";
-import Followed from "./Followed";
-import Popular from "./Popular";
-import moment from "moment";
-import StockListItem from "./StockListItem";
+import React, { useState, useEffect } from 'react';
+import styled, { css } from 'styled-components';
+import Summary from './Summary';
+import Followed from './Followed';
+import Popular from './Popular';
+import NoData from '../commonComponents/NoData'
+import moment from 'moment';
+import StockListItem from './StockListItem';
 import {
   getFollowedCurrentDayStockData,
   getPopularCurrentDayStockData,
   getDisneyHistoryData,
   getTeslaHistoryData,
   getZalandoHistoryData
-} from "../../data/fetchData";
+} from '../../data/fetchData';
 
 const StocksContainter = styled.div`
   @media (min-width: 1300px) {
@@ -62,6 +63,7 @@ const Stocks = () => {
       setFollowedCurrentDayStockDataState(followedCurrentDayStockData);
 
       const historyDataTesla = await getTeslaHistoryData();
+      console.log(historyDataTesla);
       const historyDataDisney = await getDisneyHistoryData();
       const historyDataZalando = await getZalandoHistoryData(); 
 
@@ -70,7 +72,7 @@ const Stocks = () => {
         historyDataTesla.history,
         historyDataZalando.history
       ]
-      setSummaryStockData(summaryStockDataArray);
+      setSummaryStockData(summaryStockDataArray.includes('undefined') ? 'no data' : summaryStockData);
     })();
   }, []);
 
@@ -95,9 +97,8 @@ const Stocks = () => {
 
   return (
     <StocksContainter>
-      {summaryStockData === null ? null : (
-        <Summary followedCurrentDayStockData={followedCurrentDayStockDataState} summaryStockData={summaryStockData} />
-      )}
+      {summaryStockData === null || summaryStockData === 'no data found' ? <NoData /> : 
+        <Summary followedCurrentDayStockData={followedCurrentDayStockDataState} summaryStockData={summaryStockData} />}
       <Followed followedStockListComponents={followedStockListComponents} />
       <Popular popularStockListComponents={popularStockListComponents} />
     </StocksContainter>

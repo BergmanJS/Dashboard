@@ -52,7 +52,7 @@ const App = () => {
         <Stocks />
         <RightContentContainer>
           <FavoriteLinks />
-          <Corona />
+          {/* <Corona /> */}
           <Odds />
           <SportResults />
         </RightContentContainer>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from "react";
+import React from "react";
 import ContentBlock from "./../commonComponents/ContentBlock";
 import MainTitle from "./../commonComponents/MainTitle";
 import Chart from "./Chart";
@@ -9,7 +9,7 @@ const Summary = (props) => {
     return(
         <ContentBlock>
             <MainTitle>Followed stock summary</MainTitle>
-            <Chart currentDayData={props.followedCurrentDayStockData} summaryStockData={props.summaryStockData}/>
+            <Chart currentDayData={currentDayData} summaryStockData={props.summaryStockData}/>
         </ContentBlock>
     );
 }
