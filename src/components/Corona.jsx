@@ -42,7 +42,6 @@ const StatisticLabel = styled.span`
 
 const Corona = () => {
     const [date, setDate] = useState(null);
-    
     const [newCases, setNewCases] = useState(null);
     const [totalDeaths, setTotalDeaths] = useState(null);
     const [totalCases, setTotalCases] = useState(null);
@@ -52,7 +51,6 @@ const Corona = () => {
     useEffect(() => {
         (async function waitData() {
             const coronaStatsFinland = await getCoronaStatsFromFinland();
-            console.log('coronaStatsFingland', coronaStatsFinland);
             setDate(coronaStatsFinland.latest_stat_by_country[0].record_date.slice(0, 16));
             setTotalDeaths(coronaStatsFinland.latest_stat_by_country[0].total_deaths);
             setNewCases(coronaStatsFinland.latest_stat_by_country[0].new_cases);

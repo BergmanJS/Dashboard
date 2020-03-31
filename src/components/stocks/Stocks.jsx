@@ -63,7 +63,6 @@ const Stocks = () => {
       setFollowedCurrentDayStockDataState(followedCurrentDayStockData);
 
       const historyDataTesla = await getTeslaHistoryData();
-      console.log(historyDataTesla);
       const historyDataDisney = await getDisneyHistoryData();
       const historyDataZalando = await getZalandoHistoryData(); 
 

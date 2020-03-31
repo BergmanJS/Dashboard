@@ -33,8 +33,6 @@ const allStocksPrice = (currentDayCloseValueTesla, currentDayCloseValueDisney, c
 }
 
 const getYearsProgressValue = (summaryStockData, filtteredCommonStockDays) => {
-  console.log('summary stock data', summaryStockData);
-  console.log('filtteredCommonStockDays', filtteredCommonStockDays);
   const yearsFirstCloseValueDisney = summaryStockData[0][filtteredCommonStockDays[0]].close;
   const yearsFirstCloseValueTesla = summaryStockData[1][filtteredCommonStockDays[0]].close;
   const yearsFirstCloseValueZalando = summaryStockData[2][filtteredCommonStockDays[0]].close;

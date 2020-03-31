@@ -4,7 +4,7 @@ const a = moment().subtract(1, 'year');
 const yearFromNow = a.format().slice(0, 10);
 
 const getCoronaStatsFromFinland = () => {
-  return fetch("https://coronavirus-monitor.p.rapidapi.com/coronavirus/latest_stat_by_country.php?country=finland", {
+  return fetch("https://coronavirus-monitor.p.rapidapi.com/coronavirus/latest_stat_by_country_name.php?country=finland", {
 	"method": "GET",
 	"headers": {
 		"x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
