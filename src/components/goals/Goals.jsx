@@ -8,7 +8,7 @@ import GoalListItem from './GoalListItem';
 import styled from "styled-components";
 import firebase from 'firebase/app';
 import database from 'firebase/database';
-
+/* 
   var firebaseConfig = {
     apiKey: "AIzaSyCU2YdiVqlKb3DbAJKD3T3iazZ0kHgIyy8",
     authDomain: "dashboard-6ffdd.firebaseapp.com",
@@ -19,7 +19,7 @@ import database from 'firebase/database';
     appId: "1:125883349213:web:b07b2062a0f96d2b2d4334",
     measurementId: "G-32788WE9Q0"
   };
-  firebase.initializeApp(firebaseConfig);
+  firebase.initializeApp(firebaseConfig); */
 
 const GoalsHeader = styled.div`
     display: flex;
