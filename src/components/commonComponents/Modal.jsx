@@ -2,14 +2,13 @@ import styled, { css } from "styled-components";
 
 const Modal = styled.div`
     position: fixed;
-    top: 50%;
+    top: 25%;
     left: 50%;
-    margin-top: -5rem;
     margin-left: -13rem;
     padding: 1.3rem;
     background-color: #ffffff;
     border-radius: 1rem;
-    height: 10rem;
+    height: ${props => props.height || '10rem' };
     width: 26rem;
     z-index: 2;
     box-shadow: 0 0.375rem 2rem -1rem #4d4d4d;

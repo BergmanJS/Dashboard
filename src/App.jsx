@@ -6,7 +6,7 @@ import CenterContentContainer from './components/CenterContentContainer';
 import RightContentContainer from './components/RightContentContainer';
 import Weather from './components/weather/Weather';
 import Goals from './components/goals/Goals';
-import Training from './components/training/Training';
+import Workout from './components/workout/Workout';
 import Stocks from './components/stocks/Stocks';
 import SportResults from './components/sportResults/SportResults';
 import Odds from './components/odds/Odds';
@@ -67,7 +67,7 @@ const App = () => {
           <Goals firebaseConfig={firebaseConfig}/>
         </LeftContentContainer>
         <CenterContentContainer>
-          <Training />
+          <Workout />
           <Stocks />
         </CenterContentContainer>
         <RightContentContainer>
