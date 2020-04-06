@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import ContentBlock from "./../commonComponents/ContentBlock";
-import MainTitle from "./../commonComponents/MainTitle";
-import Button from "./../commonComponents/Button";
+import ContentBlock from './../commonComponents/ContentBlock';
+import MainTitle from './../commonComponents/MainTitle';
+import Button from './../commonComponents/Button';
 import Label from './../commonComponents/Label';
 import Modal from './../commonComponents/Modal';
+import WorkoutChart from './WorkoutChart';
 import firebase from 'firebase/app';
 import database from 'firebase/database';
 
@@ -46,6 +47,38 @@ const WorkoutName = styled.span`
   color: #252745;
 `
 
+const WorkoutBlockHeader = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`
+
+const WorkoutStaticContainer = styled.div`
+  display: flex; 
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  max-width: 35rem;
+`
+
+const WorkoutValueContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+const WorkoutCount = styled.span`
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #252745;
+`
+
+const WorkoutLabel = styled.span`
+  font-size: 0.875rem;
+  color: #7c7c7c;
+  font-weight: bold;
+`
+
 const setWorkout = (goalId, goal, week, date) => {
   firebase.database().ref('workouts/' + goalId).set({
     goal: goal,
@@ -59,14 +92,12 @@ const setWorkout = (goalId, goal, week, date) => {
 }
 
 const Workout = () => {
-    const [workoutData, setWorkoutData] = useState(null);
+    const [currentWorkoutData, setCurrentWorkoutData] = useState(null);
     const [openModal, setOpenModal] = useState(false);
     const [inputValue, setInputValue] = useState('');
 
     const handleInputChange = (workout) => {
-     
       setInputValue(workout);
-
   }
 
   const handleSubmit = (e) => {
@@ -92,18 +123,45 @@ const Workout = () => {
   }
 
   const gotData = (data) => {
-    const goalsData = data.val();
-    /* generateGoalComponents(goalsData); */
+    const workoutData = data.val();
+    console.log(workoutData);
+    setCurrentWorkoutData(workoutData);
   }
 
     useEffect(() =>{
-        
+      getWorkouts();
+      console.log(currentWorkoutData)
     },[])
 
     return(
         <WorkoutContainter>
+          <WorkoutBlockHeader>
             <MainTitle>Workouts</MainTitle>
             <Button onClick={() => setOpenModal(true)}>Add new Goal</Button>
+          </WorkoutBlockHeader>
+          <WorkoutStaticContainer>
+            <WorkoutValueContainer>
+              <WorkoutCount>352</WorkoutCount>
+              <WorkoutLabel>Total</WorkoutLabel>
+            </WorkoutValueContainer>
+            <WorkoutValueContainer>
+              <WorkoutCount>200</WorkoutCount>
+              <WorkoutLabel>Gym</WorkoutLabel>
+            </WorkoutValueContainer>
+            <WorkoutValueContainer>
+              <WorkoutCount>42</WorkoutCount>
+              <WorkoutLabel>Yoga</WorkoutLabel>
+            </WorkoutValueContainer>
+            <WorkoutValueContainer>
+              <WorkoutCount>10</WorkoutCount>
+              <WorkoutLabel>Jogging</WorkoutLabel>
+            </WorkoutValueContainer>
+            <WorkoutValueContainer>
+              <WorkoutCount>0</WorkoutCount>
+              <WorkoutLabel>Hockey</WorkoutLabel>
+            </WorkoutValueContainer>
+          </WorkoutStaticContainer>
+          {currentWorkoutData === null ? null : <WorkoutChart currentWorkoutData={currentWorkoutData} />}
             {openModal ? 
             <Modal height={'auto'}>
               <form onSubmit={handleSubmit}>
@@ -138,6 +196,7 @@ const Workout = () => {
            {/*  <Chart currentDayData={currentDayData} summaryStockData={props.summaryStockData}/> */}
         </WorkoutContainter>
     );
+    
 }
 
 export default Workout;

@@ -34,7 +34,6 @@ import {
       height: 50%;
       box-shadow: none;
     }
-
   }
 `;
 
@@ -44,7 +43,6 @@ const Stocks = () => {
 
   useEffect(() => {
     (async function waitData() {
-      
       const followedCurrentDayStockData = await getFollowedCurrentDayStockData();
       const popularCurrentDayStockData = await getPopularCurrentDayStockData();
 

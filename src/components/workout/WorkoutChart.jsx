@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import * as am4core from "@amcharts/amcharts4/core";
+import * as am4charts from "@amcharts/amcharts4/charts";
+import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
-const TrainingChart = ({ trainingData }) => {
+const TrainingChart = ({ currentWorkoutData }) => {
    //WIP
   useEffect(() => {
-    setTrainingData(trainingData);
+    console.log(currentWorkoutData)
+   /*  setTrainingData(currentWorkoutData); */
     const am4themes_myTheme = (target) => {
         if (target instanceof am4charts.LineSeries) {
         target.fill = am4core.color("#252745");
@@ -18,12 +22,12 @@ const TrainingChart = ({ trainingData }) => {
 
     chart.paddingRight = 20;
     
-    for (let i = 0; i < filtteredCommonStockDays.length; i++) {
+    for (let i = 0; i < 20; i++) {
       
       data.push({ 
-        date: new Date(filtteredCommonStockDays[i]), 
+        date: new Date(), 
         name: "name" + i, 
-        value: allStocksPrice(currentDayCloseValueTesla, currentDayCloseValueDisney, currentDayCloseValueZalando)
+        value: i
       });   
     }
 
