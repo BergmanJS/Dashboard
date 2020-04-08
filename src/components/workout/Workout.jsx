@@ -93,7 +93,7 @@ const setWorkout = (workoutId, workout, week, date) => {
 }
 
 const Workout = () => {
-    const [currentWorkoutData, setCurrentWorkoutData] = useState(null);
+    const [chartWorkoutData, setChartWorkoutData] = useState(null);
     const [openModal, setOpenModal] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const [allCounts, setAllCounts] = useState(null);
@@ -137,7 +137,7 @@ const Workout = () => {
   const gotData = (data) => {
     const workoutData = data.val();
     setWorkoutCountValues(workoutData);
-    setCurrentWorkoutData(workoutData);
+    setChartWorkoutData(workoutData);
   }
 
   const setWorkoutCountValues = (workoutData) => {
@@ -148,7 +148,6 @@ const Workout = () => {
     let yogaCountValue = 0;
     
     workoutDataArray.forEach((e) => {
-      console.log(e.workout)
       e.workout === 'Gym' ? gymCountValue++ : null;
       e.workout === 'Jogging' ? joggingCountValue++ : null;
       e.workout === 'Hockey' ? hockeyCountValue++ : null;
@@ -172,7 +171,7 @@ const Workout = () => {
     return(
         <WorkoutContainter>
           <WorkoutBlockHeader>
-            <MainTitle>Workouts</MainTitle>
+            <MainTitle>Workouts in last year</MainTitle>
             <Button onClick={() => setOpenModal(true)}>Add new Goal</Button>
           </WorkoutBlockHeader>
           {allCounts === null ? null :
@@ -199,7 +198,7 @@ const Workout = () => {
             </WorkoutValueContainer>
           </WorkoutStaticContainer>
           }
-          {currentWorkoutData === null ? null : <WorkoutChart currentWorkoutData={currentWorkoutData} />}
+          {chartWorkoutData === null ? null : <WorkoutChart chartWorkoutData={chartWorkoutData} />}
             {openModal ? 
             <Modal height={'auto'}>
               <form onSubmit={handleSubmit}>

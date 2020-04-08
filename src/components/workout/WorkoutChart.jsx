@@ -3,10 +3,14 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
-const TrainingChart = ({ currentWorkoutData }) => {
+const TrainingChart = ({ chartWorkoutData }) => {
    //WIP
+   console.log('toinen componentti', Object.values(chartWorkoutData))
+
+  
+   
   useEffect(() => {
-    console.log(currentWorkoutData)
+    
    /*  setTrainingData(currentWorkoutData); */
     const am4themes_myTheme = (target) => {
         if (target instanceof am4charts.LineSeries) {
@@ -25,7 +29,7 @@ const TrainingChart = ({ currentWorkoutData }) => {
     for (let i = 0; i < 20; i++) {
       
       data.push({ 
-        date: new Date(), 
+        date: 6, 
         name: "name" + i, 
         value: i
       });   
