@@ -6,7 +6,7 @@ import Ul from "./../commonComponents/Ul";
 const Popular = props => {
   return (
     <ContentBlock>
-      <MainTitle>Popular</MainTitle>
+      <MainTitle>Popular Stocks</MainTitle>
       <Ul>{props.popularStockListComponents}</Ul>
     </ContentBlock>
   );

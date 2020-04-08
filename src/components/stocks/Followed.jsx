@@ -6,7 +6,7 @@ import Ul from "./../commonComponents/Ul";
 const Followed = props => {
   return (
     <ContentBlock>
-      <MainTitle>Followed</MainTitle>
+      <MainTitle>Followed Stocks</MainTitle>
       <Ul>{props.followedStockListComponents}</Ul>
     </ContentBlock>
   );

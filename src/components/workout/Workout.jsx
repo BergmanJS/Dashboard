@@ -8,6 +8,7 @@ import Modal from './../commonComponents/Modal';
 import WorkoutChart from './WorkoutChart';
 import firebase from 'firebase/app';
 import database from 'firebase/database';
+import moment from 'moment';
 
 const WorkoutContainter = styled(ContentBlock)`
 
@@ -57,8 +58,8 @@ const WorkoutStaticContainer = styled.div`
   display: flex; 
   align-items: center;
   justify-content: space-between;
-  margin-top: 1rem;
-  max-width: 35rem;
+  margin-bottom: 1rem;
+  max-width: 25rem;
 `
 
 const WorkoutValueContainer = styled.div`
@@ -79,9 +80,9 @@ const WorkoutLabel = styled.span`
   font-weight: bold;
 `
 
-const setWorkout = (goalId, goal, week, date) => {
-  firebase.database().ref('workouts/' + goalId).set({
-    goal: goal,
+const setWorkout = (workoutId, workout, week, date) => {
+  firebase.database().ref('workouts/' + workoutId).set({
+    workout: workout,
     week: week,
     date: date
   }, (error) => {
@@ -95,15 +96,26 @@ const Workout = () => {
     const [currentWorkoutData, setCurrentWorkoutData] = useState(null);
     const [openModal, setOpenModal] = useState(false);
     const [inputValue, setInputValue] = useState('');
+    const [allCounts, setAllCounts] = useState(null);
 
     const handleInputChange = (workout) => {
       setInputValue(workout);
   }
 
+  const getWeek = () => {
+      const date = new Date();
+      date.setHours(0, 0, 0, 0);
+      date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+      const week1 = new Date(date.getFullYear(), 0, 4);
+      
+      return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+    }
+
   const handleSubmit = (e) => {
       const id = new Date().getTime();
-      const week = 'tähän viikko metodi';
-      const date = 'tähän pvm järkeväksi';
+      const week = getWeek();
+      const date = moment().format('l');
+    
       setWorkout(id, inputValue, week, date);
       setInputValue('');
       setOpenModal(false);
@@ -124,13 +136,37 @@ const Workout = () => {
 
   const gotData = (data) => {
     const workoutData = data.val();
-    console.log(workoutData);
+    setWorkoutCountValues(workoutData);
     setCurrentWorkoutData(workoutData);
   }
 
-    useEffect(() =>{
+  const setWorkoutCountValues = (workoutData) => {
+    const workoutDataArray = Object.values(workoutData);
+    let gymCountValue = 0;
+    let joggingCountValue = 0;
+    let hockeyCountValue = 0;
+    let yogaCountValue = 0;
+    
+    workoutDataArray.forEach((e) => {
+      console.log(e.workout)
+      e.workout === 'Gym' ? gymCountValue++ : null;
+      e.workout === 'Jogging' ? joggingCountValue++ : null;
+      e.workout === 'Hockey' ? hockeyCountValue++ : null;
+      e.workout === 'Yoga' ? yogaCountValue++ : null;
+    });
+
+    const allCounts = {
+      all: gymCountValue + joggingCountValue + hockeyCountValue + yogaCountValue,
+      gymCount: gymCountValue,
+      joggingCount: joggingCountValue,
+      hockeyCount: hockeyCountValue,
+      yogaCount: yogaCountValue
+    }
+    setAllCounts(allCounts);
+  }
+
+    useEffect(() => {
       getWorkouts();
-      console.log(currentWorkoutData)
     },[])
 
     return(
@@ -139,35 +175,34 @@ const Workout = () => {
             <MainTitle>Workouts</MainTitle>
             <Button onClick={() => setOpenModal(true)}>Add new Goal</Button>
           </WorkoutBlockHeader>
+          {allCounts === null ? null :
           <WorkoutStaticContainer>
             <WorkoutValueContainer>
-              <WorkoutCount>352</WorkoutCount>
+              <WorkoutCount>{allCounts.all}</WorkoutCount>
               <WorkoutLabel>Total</WorkoutLabel>
             </WorkoutValueContainer>
             <WorkoutValueContainer>
-              <WorkoutCount>200</WorkoutCount>
+              <WorkoutCount>{allCounts.gymCount}</WorkoutCount>
               <WorkoutLabel>Gym</WorkoutLabel>
             </WorkoutValueContainer>
             <WorkoutValueContainer>
-              <WorkoutCount>42</WorkoutCount>
+            <WorkoutCount>{allCounts.yogaCount}</WorkoutCount>
               <WorkoutLabel>Yoga</WorkoutLabel>
             </WorkoutValueContainer>
             <WorkoutValueContainer>
-              <WorkoutCount>10</WorkoutCount>
+            <WorkoutCount>{allCounts.joggingCount}</WorkoutCount>
               <WorkoutLabel>Jogging</WorkoutLabel>
             </WorkoutValueContainer>
             <WorkoutValueContainer>
-              <WorkoutCount>0</WorkoutCount>
+            <WorkoutCount>{allCounts.hockeyCount}</WorkoutCount>
               <WorkoutLabel>Hockey</WorkoutLabel>
             </WorkoutValueContainer>
           </WorkoutStaticContainer>
+          }
           {currentWorkoutData === null ? null : <WorkoutChart currentWorkoutData={currentWorkoutData} />}
             {openModal ? 
             <Modal height={'auto'}>
               <form onSubmit={handleSubmit}>
-                 {/*  <Label>New Workout
-                    <input type="text" autoFocus={openModal} value={inputValue} onChange={(e) => handleInputChange(e)} />
-                  </Label> */}
                   <WorkoutChoiceContainer>
                     <WorkoutChoice selected={inputValue === 'Gym' ? true : false} onClick={(e) => handleInputChange('Gym')}>
                       <WorkoutIcon className="mdi mdi-weight-lifter"></WorkoutIcon>
