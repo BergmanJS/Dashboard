@@ -83,6 +83,8 @@ const Weather = () => {
       const forecastData = await getForecastData();
       const currentWeather = await getCurrentWeatherData();
 
+      console.log(currentWeather)
+
       if (forecastData === null || forecastData.list.length === 0 ) {
         setDataFound(false)
       }

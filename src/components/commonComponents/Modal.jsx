@@ -26,9 +26,6 @@ const Modal = styled.div`
     }
 
     button {
-        font-size: 0.875rem;
-        max-height: 2.5rem;
-        padding: 0.7rem 1.3rem;
         margin-right: 0.3125rem;
     }
 `;

@@ -58,8 +58,9 @@ const WorkoutStaticContainer = styled.div`
   display: flex; 
   align-items: center;
   justify-content: space-between;
+  margin-top: 1rem;
   margin-bottom: 1rem;
-  max-width: 25rem;
+  padding: 0 2rem;
 `
 
 const WorkoutValueContainer = styled.div`
@@ -172,7 +173,7 @@ const Workout = () => {
         <WorkoutContainter>
           <WorkoutBlockHeader>
             <MainTitle>Workouts in last year</MainTitle>
-            <Button onClick={() => setOpenModal(true)}>Add new Goal</Button>
+            <Button onClick={() => setOpenModal(true)}>Add new workout</Button>
           </WorkoutBlockHeader>
           {allCounts === null ? null :
           <WorkoutStaticContainer>

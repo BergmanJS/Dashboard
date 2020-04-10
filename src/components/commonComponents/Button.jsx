@@ -4,15 +4,18 @@ export default styled.button`
     outline: none;
     border: none;
     cursor: pointer;
+    font-family: inherit;
     display: inline-block;
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     font-weight: bold;
     color: #ffffff;
     background-color: #ff6e6a;
     padding: 0.625rem 1rem;
     border-radius: 1.5rem;
-    max-height: 2rem;
+    height: 2.4rem;
     transition: .2s;
+    overflow: hidden;
+    white-space: nowrap;
 
     &:hover {
         background-color: #ff524d;

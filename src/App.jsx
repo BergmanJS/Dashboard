@@ -11,7 +11,6 @@ import Stocks from './components/stocks/Stocks';
 import SportResults from './components/sportResults/SportResults';
 import Odds from './components/odds/Odds';
 import FavoriteLinks from './components/FavoriteLinks/FavoriteLinks';
-import Corona from './components/Corona';
 import firebase from 'firebase/app';
 import database from 'firebase/database';
 
@@ -72,7 +71,6 @@ const App = () => {
         </CenterContentContainer>
         <RightContentContainer>
           <FavoriteLinks />
-          {/* <Corona /> */}
           <Odds />
           <SportResults />
         </RightContentContainer>

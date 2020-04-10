@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import Followed from './Followed';
-import Popular from './Popular';
 import NoData from '../commonComponents/NoData'
 import moment from 'moment';
 import StockListItem from './StockListItem';
