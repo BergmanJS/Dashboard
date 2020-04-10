@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import ListItem from "./../commonComponents/ListItem";
 import StockValue from "./StockValue";
 
 const StockListItem = props => {
-  const stockValue = props.stockData.change_pct;
-  const stockName = props.stockData.name;
+  const stockName = props.stockData.companyName;
+  const latestPrice = props.stockData.delayedPrice;
+  const stockValue = props.stockData.extendedChangePercent.toFixed(2);
   const positive = stockValue > 0;
 
   return (

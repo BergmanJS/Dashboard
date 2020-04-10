@@ -5,12 +5,28 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
 const TrainingChart = ({ chartWorkoutData }) => {
    //WIP
-   console.log('toinen componentti', Object.values(chartWorkoutData))
-
-  
+      
    
+  const test = () => {
+    const array = Object.values(chartWorkoutData);
+    const testArray = [13, 14, 15, 16, 16, 16];
+    var nameArray = array.map((el) => { 
+      
+      return el.week; });
+    console.log('namearray', nameArray);
+    /* for (let i = 0; i < array.length; i++) {
+  
+      const arrayObjectToArray = Object.values(array[i])
+      console.log('objekti arrayksi', arrayObjectToArray);
+
+
+      
+    } */
+
+  }
+
   useEffect(() => {
-    
+    test();
    /*  setTrainingData(currentWorkoutData); */
     const am4themes_myTheme = (target) => {
         if (target instanceof am4charts.LineSeries) {
@@ -29,7 +45,7 @@ const TrainingChart = ({ chartWorkoutData }) => {
     for (let i = 0; i < 20; i++) {
       
       data.push({ 
-        date: 6, 
+        weekAndYear: new Date(2018, 3, i), 
         name: "name" + i, 
         value: i
       });   
@@ -45,7 +61,7 @@ const TrainingChart = ({ chartWorkoutData }) => {
     valueAxis.renderer.minWidth = 35;
 
     let series = chart.series.push(new am4charts.LineSeries());
-    series.dataFields.dateX = "date";
+    series.dataFields.dateX = "weekAndYear";
     series.dataFields.valueY = "value";
 
     series.tooltipText = "{valueY.value}";

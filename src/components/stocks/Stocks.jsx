@@ -6,8 +6,11 @@ import NoData from '../commonComponents/NoData'
 import moment from 'moment';
 import StockListItem from './StockListItem';
 import {
-  getFollowedCurrentDayStockData,
-  getPopularCurrentDayStockData
+  getVanguardSP500ETFData,
+  getDisneyStockData,
+  getTeslaStockData,
+  getAppleData,
+  getMicrosoftData
 } from '../../data/fetchData';
 
  const StocksContainter = styled.div`
@@ -30,7 +33,6 @@ import {
 
     > div {
       height: auto;
-      width: 50%;
       height: 50%;
       box-shadow: none;
     }
@@ -39,41 +41,34 @@ import {
 
 const Stocks = () => {
   const [followedStockListComponents, setFollowedStockListComponents] = useState(null);
-  const [popularStockListComponents, setPopularStockListComponents] = useState(null);
 
   useEffect(() => {
     (async function waitData() {
-      const followedCurrentDayStockData = await getFollowedCurrentDayStockData();
-      const popularCurrentDayStockData = await getPopularCurrentDayStockData();
-
-      generateStockListItems(followedCurrentDayStockData.data,popularCurrentDayStockData.data);
-      setFollowedCurrentDayStockDataState(followedCurrentDayStockData);
+      const vanguardSP500ETFData = await getVanguardSP500ETFData();
+      const teslaStockData = await getTeslaStockData();
+      const disneyStockData = await getDisneyStockData();
+      const appleData = await getAppleData();
+      const microsoftData = await getMicrosoftData();
+      const StockDataArray = [vanguardSP500ETFData, teslaStockData, disneyStockData, appleData, microsoftData];
+      console.log('StockDataArray', StockDataArray);
+      generateStockListItems(StockDataArray);
     })();
   }, []);
 
-    const generateStockListItems = (followedStockDataArray, popularCurrentDayStockDataArray) => {
-        const stockListItemComponentsArray = [];
-        const popularStockListItemComponentsArray = [];
-
-        followedStockDataArray.forEach(e => {
-        stockListItemComponentsArray.push(
-            <StockListItem key={e.symbol} stockData={e} />
+    const generateStockListItems = (StockDataArray) => {
+        const followedStockListItemComponentsArray = [];
+        StockDataArray.forEach(e => {
+        followedStockListItemComponentsArray.push(
+          <StockListItem key={e.quote.symbol} stockData={e.quote} />
         );
         });
-        setFollowedStockListComponents(stockListItemComponentsArray);
-
-        popularCurrentDayStockDataArray.forEach(e => {
-        popularStockListItemComponentsArray.push(
-            <StockListItem key={e.symbol} stockData={e} />
-        );
-        });
-        setPopularStockListComponents(popularStockListItemComponentsArray);
+        
+        setFollowedStockListComponents(followedStockListItemComponentsArray);
     };
 
   return (
     <StocksContainter>
       <Followed followedStockListComponents={followedStockListComponents} />
-      <Popular popularStockListComponents={popularStockListComponents} />
     </StocksContainter>
   );
 };

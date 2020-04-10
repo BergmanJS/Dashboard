@@ -52,7 +52,7 @@ const AppContainer = styled.div`
 
   @media (min-width: 1300px) {
     display: grid;
-    grid-template-columns: 27rem auto 28rem;
+    grid-template-columns: 27rem auto 32rem;
     grid-template-rows: 100vh;
     padding: 0
   }

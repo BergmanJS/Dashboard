@@ -19,11 +19,93 @@ const getCoronaStatsFromFinland = () => {
 });
 }
 
+const getVanguardSP500ETFData = () => {
+  return fetch("https://investors-exchange-iex-trading.p.rapidapi.com/stock/voo/book", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "investors-exchange-iex-trading.p.rapidapi.com",
+		"x-rapidapi-key": "31dce9c245msh4487aa95fec7866p166f53jsn233484a52f4f"
+	}
+})
+.then(response => response.json().then(data => {
+  return data;
+}))
+.catch(err => {
+  console.log(err);
+});
+}
+
+const getDisneyStockData = () => {
+  return fetch("https://investors-exchange-iex-trading.p.rapidapi.com/stock/dis/book", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "investors-exchange-iex-trading.p.rapidapi.com",
+		"x-rapidapi-key": "31dce9c245msh4487aa95fec7866p166f53jsn233484a52f4f"
+	}
+})
+.then(response => response.json().then(data => {
+  return data;
+}))
+.catch(err => {
+  console.log(err);
+});
+}
+
+const getTeslaStockData = () => {
+  return fetch("https://investors-exchange-iex-trading.p.rapidapi.com/stock/tsla/book", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "investors-exchange-iex-trading.p.rapidapi.com",
+		"x-rapidapi-key": "31dce9c245msh4487aa95fec7866p166f53jsn233484a52f4f"
+	}
+})
+.then(response => response.json().then(data => {
+  return data;
+}))
+.catch(err => {
+  console.log(err);
+});
+}
+
+const getAppleData = () => {
+  return fetch("https://investors-exchange-iex-trading.p.rapidapi.com/stock/aapl/book", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "investors-exchange-iex-trading.p.rapidapi.com",
+		"x-rapidapi-key": "31dce9c245msh4487aa95fec7866p166f53jsn233484a52f4f"
+	}
+})
+.then(response => response.json().then(data => {
+  return data;
+}))
+.catch(err => {
+  console.log(err);
+});
+}
+
+
+const getMicrosoftData = () => {
+  return fetch("https://investors-exchange-iex-trading.p.rapidapi.com/stock/msft/book", {
+	"method": "GET",
+	"headers": {
+		"x-rapidapi-host": "investors-exchange-iex-trading.p.rapidapi.com",
+		"x-rapidapi-key": "31dce9c245msh4487aa95fec7866p166f53jsn233484a52f4f"
+	}
+})
+.then(response => response.json().then(data => {
+  return data;
+}))
+.catch(err => {
+  console.log(err);
+});
+}
+
+
 const NoDataFound = () => {
   console.log('test return null')
   return null;
 }
-
+/* 
 const getFollowedCurrentDayStockData = () => {
     return fetch(
         "https://api.worldtradingdata.com/api/v1/stock?symbol=TSLA,DIS,ZAL.DE&api_token=" + apiKeys.stocks
@@ -52,8 +134,8 @@ const getFollowedCurrentDayStockData = () => {
       .then(data => data)
       .catch(err => NoDataFound());
   } 
-
-  const getTeslaHistoryData = () => {
+ */
+  /* const getTeslaHistoryData = () => {
     
     return fetch(
         "https://api.worldtradingdata.com/api/v1/history?symbol=TSLA&date_from=" + yearFromNow + "&api_token=" + apiKeys.stocks
@@ -71,7 +153,7 @@ const getFollowedCurrentDayStockData = () => {
       .then(response => response.json())
       .then(data => data)
       .catch(err => NoDataFound());
-  }
+  } */
 
   const getForecastData = () => {
     return fetch(
@@ -123,16 +205,21 @@ const getFollowedCurrentDayStockData = () => {
 
   module.exports = {
     getCoronaStatsFromFinland,
-    getPopularCurrentDayStockData,
+  /*   getPopularCurrentDayStockData,
     getFollowedCurrentDayStockData,
     getDisneyHistoryData,
     getTeslaHistoryData,
-    getZalandoHistoryData,
+    getZalandoHistoryData, */
     getForecastData,
     getCurrentWeatherData,
     getPremierLeagueOddsData,
     getNHLOddsData,
-    getNHLData
+    getNHLData,
+    getTeslaStockData,
+    getDisneyStockData,
+    getVanguardSP500ETFData,
+    getAppleData,
+    getMicrosoftData
  }
     
 
