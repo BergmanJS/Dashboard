@@ -13,6 +13,7 @@ const Modal = styled.div`
     z-index: 2;
     box-shadow: 0 0.375rem 2rem -1rem #4d4d4d;
     transition: .2s;
+    z-index: 10;
 
     input {
         outline: none;

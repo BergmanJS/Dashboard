@@ -49,7 +49,7 @@ const Stocks = () => {
       const appleData = await getAppleData();
       const microsoftData = await getMicrosoftData();
       const StockDataArray = [vanguardSP500ETFData, teslaStockData, disneyStockData, appleData, microsoftData];
-      console.log('StockDataArray', StockDataArray);
+
       generateStockListItems(StockDataArray);
     })();
   }, []);

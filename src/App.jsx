@@ -72,7 +72,7 @@ const App = () => {
         <RightContentContainer>
           <FavoriteLinks />
           <Odds />
-          <SportResults />
+          {/* <SportResults /> */}
         </RightContentContainer>
       </AppContainer>
    

@@ -86,7 +86,7 @@ const getMicrosoftData = () => {
 
 
 const NoDataFound = () => {
-  console.log('test return null')
+  console.log('no data found')
   return null;
 }
 

@@ -83,8 +83,6 @@ const Weather = () => {
       const forecastData = await getForecastData();
       const currentWeather = await getCurrentWeatherData();
 
-      console.log(currentWeather)
-
       if (forecastData === null || forecastData.list.length === 0 ) {
         setDataFound(false)
       }
@@ -93,7 +91,7 @@ const Weather = () => {
         setCurrentTemp(Math.round(currentWeather.main.temp));
         setCurrentTempFeelsLike(Math.round(currentWeather.main.feels_like));
         setCurrentWind(currentWeather.wind.speed);
-        setNightMode(isNightMode(sunsetTime));
+        setNightMode(isNightMode(true));
         setCurrentIconUrl("http://openweathermap.org/img/wn/" + currentWeather.weather[0].icon + "@2x.png");
         setWeatherDataList(forecastData);
       }

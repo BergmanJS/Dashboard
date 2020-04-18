@@ -228,7 +228,6 @@ const Workout = () => {
             :
             null
             }
-           {/*  <Chart currentDayData={currentDayData} summaryStockData={props.summaryStockData}/> */}
         </WorkoutContainter>
     );
     
