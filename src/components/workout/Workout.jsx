@@ -172,7 +172,7 @@ const Workout = () => {
     return(
         <WorkoutContainter>
           <WorkoutBlockHeader>
-            <MainTitle>Workouts in last year</MainTitle>
+            <MainTitle>Workouts</MainTitle>
             <Button onClick={() => setOpenModal(true)}>Add new workout</Button>
           </WorkoutBlockHeader>
           {allCounts === null ? null :

@@ -4,7 +4,6 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
 const WorkoutChart = ({ chartWorkoutData }) => {
-  console.log('workout chart render?')
 
   const getChartData = () => {
     const array = Object.values(chartWorkoutData);
@@ -58,15 +57,13 @@ const WorkoutChart = ({ chartWorkoutData }) => {
       return chart.colors.getIndex(target.dataItem.index);
     });
   }
-
+  
   useEffect(() => {
-   console.log('use')
     createChart();
-  }, []);
-
+  }, [chartWorkoutData]);
     
-    return (
-        <div id="chartdiv" style={{ width: "100%", height: "22rem" }}></div>
+    return ( 
+      <div id="chartdiv" style={{ width: "100%", height: "22rem" }}></div>
     );
 }
 
