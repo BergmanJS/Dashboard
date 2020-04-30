@@ -68,7 +68,7 @@ const WorkoutChart = ({ chartWorkoutData }) => {
         createChart();
     }, [chartWorkoutData]);
 
-    return <div id="chartdiv" style={{ width: '100%', height: '22rem' }}></div>;
+    return <div id="chartdiv" style={{ width: '100%', height: '21rem' }}></div>;
 };
 
 export default WorkoutChart;

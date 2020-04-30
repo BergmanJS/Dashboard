@@ -14,6 +14,8 @@ const WorkoutContainter = styled(ContentBlock)`
     @media (min-width: 1300px) {
         height: 100%;
         box-shadow: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
     }
 `;
 
