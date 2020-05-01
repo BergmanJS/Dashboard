@@ -1,75 +1,90 @@
 import React, { useState, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import Followed from './Followed';
-import NoData from '../commonComponents/NoData'
+import NoData from '../commonComponents/NoData';
 import moment from 'moment';
 import StockListItem from './StockListItem';
 import {
-  getVanguardSP500ETFData,
-  getDisneyStockData,
-  getTeslaStockData,
-  getAppleData,
-  getMicrosoftData
+    getVanguardSP500ETFData,
+    getDisneyStockData,
+    getTeslaStockData,
+    getMurphyOilData,
+    getRoyalCaribbeanCruisesData,
+    getMicrosoftData,
 } from '../../data/fetchData';
 
- const StocksContainter = styled.div`
+const StocksContainter = styled.div`
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
- 
-  @media (min-width: 1300px) {
-    display: flex;
-    flex-direction: row !important;
-    flex-wrap: wrap;
-    overflow-y: auto;
-    align-items: flex-start !important;
-    height: 100%;
 
-    &::-webkit-scrollbar {
-      display: none;
-    }
+    @media (min-width: 1300px) {
+        display: flex;
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        overflow-y: auto;
+        align-items: flex-start !important;
+        height: 100%;
 
-    > div {
-      height: auto;
-      height: 50%;
-      box-shadow: none;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        > div {
+            height: auto;
+            height: 50%;
+            box-shadow: none;
+        }
     }
-  }
 `;
 
 const Stocks = () => {
-  const [followedStockListComponents, setFollowedStockListComponents] = useState(null);
+    const [
+        followedStockListComponents,
+        setFollowedStockListComponents,
+    ] = useState(null);
 
-  useEffect(() => {
-    (async function waitData() {
-      const vanguardSP500ETFData = await getVanguardSP500ETFData();
-      const teslaStockData = await getTeslaStockData();
-      const disneyStockData = await getDisneyStockData();
-      const appleData = await getAppleData();
-      const microsoftData = await getMicrosoftData();
-      const StockDataArray = [vanguardSP500ETFData, teslaStockData, disneyStockData, appleData, microsoftData];
+    useEffect(() => {
+        (async function waitData() {
+            const vanguardSP500ETFData = await getVanguardSP500ETFData();
+            const teslaStockData = await getTeslaStockData();
+            const disneyStockData = await getDisneyStockData();
+            const royalCaribbeanCruisesData = await getRoyalCaribbeanCruisesData();
+            const murphyOilData = await getMurphyOilData();
+            const microsoftData = await getMicrosoftData();
+            const StockDataArray = [
+                vanguardSP500ETFData,
+                teslaStockData,
+                disneyStockData,
+                royalCaribbeanCruisesData,
+                murphyOilData,
+                microsoftData,
+            ];
 
-      generateStockListItems(StockDataArray);
-    })();
-  }, []);
+            generateStockListItems(StockDataArray);
+        })();
+    }, []);
 
     const generateStockListItems = (StockDataArray) => {
+        console.log(StockDataArray);
         const followedStockListItemComponentsArray = [];
-        StockDataArray.forEach(e => {
-        followedStockListItemComponentsArray.push(
-          <StockListItem key={e.quote.symbol} stockData={e.quote} />
-        );
+        StockDataArray.forEach((e) => {
+            followedStockListItemComponentsArray.push(
+                <StockListItem key={e.quote.symbol} stockData={e.quote} />
+            );
         });
-        
+
         setFollowedStockListComponents(followedStockListItemComponentsArray);
     };
 
-  return (
-    <StocksContainter>
-      <Followed followedStockListComponents={followedStockListComponents} />
-    </StocksContainter>
-  );
+    return (
+        <StocksContainter>
+            <Followed
+                followedStockListComponents={followedStockListComponents}
+            />
+        </StocksContainter>
+    );
 };
 
 export default Stocks;
