@@ -28,7 +28,6 @@ const WorkoutChart = ({ chartWorkoutData }) => {
     };
 
     const createChart = () => {
-        console.log('createChart');
         am4core.useTheme(am4themes_animated);
 
         const chart = am4core.create('chartdiv', am4charts.XYChart);
