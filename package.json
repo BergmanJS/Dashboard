@@ -4,7 +4,9 @@
   "description": "",
   "scripts": {
     "dev": "parcel ./src/index.html",
-    "build": "parcel build ./src/index.html"
+    "build": "parcel build ./src/index.html",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "repository": {
     "type": "git",
@@ -24,7 +26,9 @@
     "styled-components": "^5.0.0"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.4"
+    "gh-pages": "^2.2.0",
+    "parcel-bundler": "^1.12.4",
+    "homepage": "http://BergmanJS.github.io/Dashboard"
   },
   "browserslist": [
     "last 1 chrome version",
