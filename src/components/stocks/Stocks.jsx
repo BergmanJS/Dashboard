@@ -67,7 +67,6 @@ const Stocks = () => {
     }, []);
 
     const generateStockListItems = (StockDataArray) => {
-        console.log(StockDataArray);
         const followedStockListItemComponentsArray = [];
         StockDataArray.forEach((e) => {
             followedStockListItemComponentsArray.push(
