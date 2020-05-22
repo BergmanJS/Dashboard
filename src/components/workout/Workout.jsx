@@ -23,7 +23,7 @@ const WorkoutContainter = styled(ContentBlock)`
 `;
 
 const WorkoutListContainer = styled.div`
-    margin: 1rem 0 2rem 0;
+    margin: 0 0 2rem 0;
 `;
 
 const WorkoutChoice = styled.div`
@@ -95,6 +95,30 @@ const WorkoutLabel = styled.span`
     }
 `;
 
+const DatePickerContainer = styled.div`
+    position: relative;
+    display: flex;
+    justify-content: center;
+    transition: 0.2s;
+`;
+
+const WorkoutDatePicker = styled(DatePicker)`
+    display: block;
+    border: none !important;
+    margin: 1rem auto !important;
+    text-align: center;
+    max-width: 8rem;
+    font-size: 1.3rem !important;
+    padding: 0.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.2s;
+
+    :hover {
+        background-color: #f5f6fa;
+    }
+`;
+
 const setWorkout = (workoutId, workout, week, date) => {
     console.log('start date', date);
     firebase
@@ -149,16 +173,18 @@ const Workout = () => {
         const week = getWeek();
         const date = moment(startDate).format('l');
 
-
         setWorkout(id, inputValue, week, date);
         setInputValue('');
+        setStartDate(new Date());
         setOpenModal(false);
+        
         e.preventDefault();
     };
 
     const handleModalClose = (e) => {
         setOpenModal(false);
         setInputValue('');
+        setStartDate(new Date());
         e.preventDefault();
     };
 
@@ -204,7 +230,7 @@ const Workout = () => {
 
     const datePicker = () => {
         return (
-            <DatePicker
+            <WorkoutDatePicker
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
             />
@@ -222,7 +248,7 @@ const Workout = () => {
                 <Button onClick={() => setOpenModal(true)}>
                     Add new workout
                 </Button>
-                <Button onClick={() => setOpenEditWorkoutModal(true)}>
+                <Button secondary onClick={() => setOpenEditWorkoutModal(true)}>
                     Edit workouts
                 </Button>
             </WorkoutBlockHeader>
@@ -258,7 +284,9 @@ const Workout = () => {
                     <form onSubmit={handleSubmit}>
                         <Label>Add new workout</Label>
                         <WorkoutListContainer>
-                            {datePicker()}
+                            <DatePickerContainer>
+                                {datePicker()}
+                            </DatePickerContainer>
                             <WorkoutChoice
                                 selected={inputValue === 'Gym' ? true : false}
                                 onClick={(e) => handleInputChange('Gym')}
@@ -295,13 +323,17 @@ const Workout = () => {
                         <Button type="submit" value="Set new goal">
                             Save
                         </Button>
-                        <Button secondary onClick={(e) => handleModalClose(e)}>
+                        <Button cancel onClick={(e) => handleModalClose(e)}>
                             Cancel
                         </Button>
                     </form>
                 </Modal>
             ) : null}
-            {openEditWorkoutModal ? <EditWorkoutModal setOpenEditWorkoutModal={setOpenEditWorkoutModal} /> : null}
+            {openEditWorkoutModal ? (
+                <EditWorkoutModal
+                    setOpenEditWorkoutModal={setOpenEditWorkoutModal}
+                />
+            ) : null}
         </WorkoutContainter>
     );
 };

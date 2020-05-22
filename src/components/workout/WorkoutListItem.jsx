@@ -40,6 +40,7 @@ const WorkoutDate = styled.span`
 const DeleteWorkoutButton = styled(Button)`
     background-color: transparent;
     margin-left: auto;
+    border: none;
 `;
 
 const pickIcon = (workoutName) => {

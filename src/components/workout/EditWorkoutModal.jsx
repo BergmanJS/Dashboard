@@ -9,12 +9,14 @@ import database from 'firebase/database';
 import moment from 'moment';
 
 const WorkoutListContainer = styled.div`
-    margin: 1rem 0 2rem 0;
+    margin: 1rem 0;
     overflow-y: auto;
-    max-height: 22rem;
+    max-height: 20rem;
     &::-webkit-scrollbar {
             display: none;
           }
+
+        
 `;
 
 const EditWorkoutModal = ({ setOpenEditWorkoutModal }) => {
@@ -61,7 +63,7 @@ const EditWorkoutModal = ({ setOpenEditWorkoutModal }) => {
                 {!workoutsData ? null : generateWorkoutList()}
             </WorkoutListContainer>
             
-            <Button onClick={(e) => handleModalClose(e)}>
+            <Button secondary onClick={(e) => handleModalClose(e)}>
                 Close
             </Button>
         </Modal>
