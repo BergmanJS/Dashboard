@@ -6,16 +6,22 @@ export default styled.button`
     cursor: pointer;
     font-family: inherit;
     display: inline-block;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     font-weight: bold;
     color: #ffffff;
     background-color: #ff6e6a;
-    padding: 0.625rem 1rem;
+    padding: 0.625rem .8rem;
     border-radius: 1.5rem;
     height: 2.4rem;
     transition: 0.2s;
     overflow: hidden;
     white-space: nowrap;
+    margin:  ${props => props.margin || '0'};
+
+    @media (min-width: 768px) {
+        font-size: 0.875rem;
+        padding: 0.625rem 1rem;
+    }
 
     &:hover {
         background-color: #ff524d;

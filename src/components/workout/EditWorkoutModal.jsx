@@ -13,10 +13,8 @@ const WorkoutListContainer = styled.div`
     overflow-y: auto;
     max-height: 20rem;
     &::-webkit-scrollbar {
-            display: none;
-          }
-
-        
+        display: none;
+    }
 `;
 
 const EditWorkoutModal = ({ setOpenEditWorkoutModal }) => {
@@ -29,7 +27,11 @@ const EditWorkoutModal = ({ setOpenEditWorkoutModal }) => {
             const workoutId = e[0];
 
             workoutsArray.push(
-                <WorkoutListItem key={e[0]} workoutId={workoutId} listItemData={e[1]} />
+                <WorkoutListItem
+                    key={e[0]}
+                    workoutId={workoutId}
+                    listItemData={e[1]}
+                />
             );
         });
 
@@ -62,7 +64,6 @@ const EditWorkoutModal = ({ setOpenEditWorkoutModal }) => {
             <WorkoutListContainer>
                 {!workoutsData ? null : generateWorkoutList()}
             </WorkoutListContainer>
-            
             <Button secondary onClick={(e) => handleModalClose(e)}>
                 Close
             </Button>

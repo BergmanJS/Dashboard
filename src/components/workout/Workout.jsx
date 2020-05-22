@@ -57,6 +57,11 @@ const WorkoutBlockHeader = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    div {
+        display: inline-block;
+        margin-left: auto;
+    }
 `;
 
 const WorkoutStaticContainer = styled.div`
@@ -177,7 +182,7 @@ const Workout = () => {
         setInputValue('');
         setStartDate(new Date());
         setOpenModal(false);
-        
+
         e.preventDefault();
     };
 
@@ -245,12 +250,14 @@ const Workout = () => {
         <WorkoutContainter>
             <WorkoutBlockHeader>
                 <MainTitle>Workouts</MainTitle>
-                <Button onClick={() => setOpenModal(true)}>
-                    Add new workout
-                </Button>
-                <Button secondary onClick={() => setOpenEditWorkoutModal(true)}>
-                    Edit workouts
-                </Button>
+                <div>
+                    <Button margin={'0 .4rem 0 0'} onClick={() => setOpenModal(true)}>
+                        Add new workout
+                    </Button>
+                    <Button secondary onClick={() => setOpenEditWorkoutModal(true)}>
+                        Edit workouts
+                    </Button>
+                </div>
             </WorkoutBlockHeader>
             {allCounts === null ? null : (
                 <WorkoutStaticContainer>

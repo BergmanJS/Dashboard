@@ -9,6 +9,16 @@ import { getForecastData, getCurrentWeatherData } from '../../data/fetchData';
 import NoData from '../commonComponents/NoData';
 import DefaultText from '../commonComponents/DefaultText';
 
+const WeatherContainer = styled(ContentBlock)`
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+
+    @media (min-width: 768px) {
+        padding-right: 2rem;
+        padding-left: 2rem;
+    }
+`;
+
 const WeatherToday = styled.div`
     display: flex;
     align-items: center;
@@ -35,9 +45,14 @@ const WeatherToday = styled.div`
 `;
 
 const Icon = styled.img`
-    width: 6rem;
-    height: 6rem;
+    width: 4rem;
+    height: 4rem;
     filter: brightness(1.5);
+
+    @media (min-width: 768px) {
+        width: 6rem;
+        height: 6rem;
+    }
 `;
 
 const WeatherSecondaryInfoContainer = styled.div`
@@ -105,7 +120,7 @@ const Weather = () => {
     }, []);
 
     return (
-        <ContentBlock
+        <WeatherContainer
             backgroundColor={'#252745'}
             padding="11rem 2rem 2rem 2rem"
         >
@@ -142,7 +157,7 @@ const Weather = () => {
             ) : (
                 <NoData lightTheme />
             )}
-        </ContentBlock>
+        </WeatherContainer>
     );
 };
 
