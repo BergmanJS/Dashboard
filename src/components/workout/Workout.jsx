@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import styled from 'styled-components';
+import EditWorkoutModal from './EditWorkoutModal';
 import ContentBlock from './../commonComponents/ContentBlock';
 import MainTitle from './../commonComponents/MainTitle';
 import Button from './../commonComponents/Button';
@@ -19,7 +22,7 @@ const WorkoutContainter = styled(ContentBlock)`
     }
 `;
 
-const WorkoutChoiceContainer = styled.div`
+const WorkoutListContainer = styled.div`
     margin: 1rem 0 2rem 0;
 `;
 
@@ -93,6 +96,7 @@ const WorkoutLabel = styled.span`
 `;
 
 const setWorkout = (workoutId, workout, week, date) => {
+    console.log('start date', date);
     firebase
         .database()
         .ref('workouts/' + workoutId)
@@ -115,21 +119,24 @@ const Workout = () => {
     const [openModal, setOpenModal] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const [allCounts, setAllCounts] = useState(null);
+    const [startDate, setStartDate] = useState(new Date());
+    const [openEditWorkoutModal, setOpenEditWorkoutModal] = useState(false);
 
     const handleInputChange = (workout) => {
         setInputValue(workout);
     };
 
     const getWeek = () => {
-        const date = new Date();
-        date.setHours(0, 0, 0, 0);
-        date.setDate(date.getDate() + 3 - ((date.getDay() + 6) % 7));
-        const week1 = new Date(date.getFullYear(), 0, 4);
+        startDate.setHours(0, 0, 0, 0);
+        startDate.setDate(
+            startDate.getDate() + 3 - ((startDate.getDay() + 6) % 7)
+        );
+        const week1 = new Date(startDate.getFullYear(), 0, 4);
 
         return (
             1 +
             Math.round(
-                ((date.getTime() - week1.getTime()) / 86400000 -
+                ((startDate.getTime() - week1.getTime()) / 86400000 -
                     3 +
                     ((week1.getDay() + 6) % 7)) /
                     7
@@ -140,7 +147,8 @@ const Workout = () => {
     const handleSubmit = (e) => {
         const id = new Date().getTime();
         const week = getWeek();
-        const date = moment().format('l');
+        const date = moment(startDate).format('l');
+
 
         setWorkout(id, inputValue, week, date);
         setInputValue('');
@@ -194,6 +202,15 @@ const Workout = () => {
         setAllCounts(allCounts);
     };
 
+    const datePicker = () => {
+        return (
+            <DatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+            />
+        );
+    };
+
     useEffect(() => {
         getWorkouts();
     }, []);
@@ -204,6 +221,9 @@ const Workout = () => {
                 <MainTitle>Workouts</MainTitle>
                 <Button onClick={() => setOpenModal(true)}>
                     Add new workout
+                </Button>
+                <Button onClick={() => setOpenEditWorkoutModal(true)}>
+                    Edit workouts
                 </Button>
             </WorkoutBlockHeader>
             {allCounts === null ? null : (
@@ -237,7 +257,8 @@ const Workout = () => {
                 <Modal height={'auto'}>
                     <form onSubmit={handleSubmit}>
                         <Label>Add new workout</Label>
-                        <WorkoutChoiceContainer>
+                        <WorkoutListContainer>
+                            {datePicker()}
                             <WorkoutChoice
                                 selected={inputValue === 'Gym' ? true : false}
                                 onClick={(e) => handleInputChange('Gym')}
@@ -270,7 +291,7 @@ const Workout = () => {
                                 <WorkoutIcon className="mdi mdi-meditation"></WorkoutIcon>
                                 <WorkoutName>Yoga</WorkoutName>
                             </WorkoutChoice>
-                        </WorkoutChoiceContainer>
+                        </WorkoutListContainer>
                         <Button type="submit" value="Set new goal">
                             Save
                         </Button>
@@ -280,6 +301,7 @@ const Workout = () => {
                     </form>
                 </Modal>
             ) : null}
+            {openEditWorkoutModal ? <EditWorkoutModal setOpenEditWorkoutModal={setOpenEditWorkoutModal} /> : null}
         </WorkoutContainter>
     );
 };
