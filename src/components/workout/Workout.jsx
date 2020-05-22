@@ -20,7 +20,7 @@ const WorkoutContainter = styled(ContentBlock)`
 `;
 
 const WorkoutChoiceContainer = styled.div`
-    margin-bottom: 2rem;
+    margin: 1rem 0 2rem 0;
 `;
 
 const WorkoutChoice = styled.div`
@@ -236,6 +236,7 @@ const Workout = () => {
             {openModal ? (
                 <Modal height={'auto'}>
                     <form onSubmit={handleSubmit}>
+                        <Label>Add new workout</Label>
                         <WorkoutChoiceContainer>
                             <WorkoutChoice
                                 selected={inputValue === 'Gym' ? true : false}
