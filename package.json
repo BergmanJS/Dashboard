@@ -1,13 +1,14 @@
 {
-  "homepage": "http://BergmanJS.github.io/Dashboard",
+  "homepage": "https://BergmanJS.github.io/dashboard",
   "name": "dashboard",
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "prebuild": "rm -rf dist/",
+    "build": "parcel build ./src/index.html --public-url ./",
     "dev": "parcel ./src/index.html",
-    "build": "parcel build ./src/index.html --public-url /Dashboard/",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -23,10 +24,10 @@
     "moment": "^2.24.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "styled-components": "^5.0.0"
+    "styled-components": "^5.0.0",
+    "gh-pages": "^2.2.0"
   },
   "devDependencies": {
-    "gh-pages": "^2.2.0",
     "parcel-bundler": "^1.12.4"
   },
   "browserslist": [
