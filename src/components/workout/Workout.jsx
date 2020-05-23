@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
+
 import styled from 'styled-components';
 import EditWorkoutModal from './EditWorkoutModal';
+import WorkoutDatePicker from './WorkoutDatePicker';
 import ContentBlock from './../commonComponents/ContentBlock';
 import MainTitle from './../commonComponents/MainTitle';
 import Button from './../commonComponents/Button';
@@ -67,10 +67,14 @@ const WorkoutBlockHeader = styled.div`
 const WorkoutStaticContainer = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    padding: 0 2rem;
+    
+    @media (min-width: 1440px) {
+        padding: 0 2rem;
+        justify-content: space-between;
+    }
 `;
 
 const WorkoutValueContainer = styled.div`
@@ -107,22 +111,7 @@ const DatePickerContainer = styled.div`
     transition: 0.2s;
 `;
 
-const WorkoutDatePicker = styled(DatePicker)`
-    display: block;
-    border: none !important;
-    margin: 1rem auto !important;
-    text-align: center;
-    max-width: 8rem;
-    font-size: 1.3rem !important;
-    padding: 0.5rem;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.2s;
 
-    :hover {
-        background-color: #f5f6fa;
-    }
-`;
 
 const setWorkout = (workoutId, workout, week, date) => {
     console.log('start date', date);
