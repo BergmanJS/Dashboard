@@ -252,10 +252,10 @@ const Workout = () => {
                 <MainTitle>Workouts</MainTitle>
                 <div>
                     <Button margin={'0 .4rem 0 0'} onClick={() => setOpenModal(true)}>
-                        Add new workout
+                        Add new
                     </Button>
                     <Button secondary onClick={() => setOpenEditWorkoutModal(true)}>
-                        Edit workouts
+                        Edit
                     </Button>
                 </div>
             </WorkoutBlockHeader>

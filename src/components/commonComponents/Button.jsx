@@ -17,6 +17,7 @@ export default styled.button`
     overflow: hidden;
     white-space: nowrap;
     margin:  ${props => props.margin || '0'};
+    min-width: 4.3rem;
 
     @media (min-width: 768px) {
         font-size: 0.875rem;
