@@ -84,7 +84,7 @@ const WorkoutListItem = ({ workoutId, listItemData }) => {
                 secondary
                 onClick={() => deleteGoal(workoutId)}
             >
-                Poista
+                Delete
             </DeleteWorkoutButton>
         </WorkoutChoice>
     );

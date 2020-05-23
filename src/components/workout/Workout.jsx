@@ -114,7 +114,6 @@ const DatePickerContainer = styled.div`
 
 
 const setWorkout = (workoutId, workout, week, date) => {
-    console.log('start date', date);
     firebase
         .database()
         .ref('workouts/' + workoutId)

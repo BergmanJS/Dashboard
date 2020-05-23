@@ -35,12 +35,18 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
 
     * {
-      box-sizing: border-box;
+        box-sizing: border-box;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
 
-    #id-329-title{
+    /* #id-329-title {
       display: none;
-    }
+    } */
   }
 `;
 
