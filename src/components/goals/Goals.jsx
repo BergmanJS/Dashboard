@@ -120,7 +120,7 @@ const Goals = () => {
             ) : null}
             <GoalsHeader>
                 <MainTitle color="#ffffff">Goals 2020</MainTitle>
-                <Button onClick={() => setOpenModal(true)}>Add new Goal</Button>
+                <Button onClick={() => setOpenModal(true)}>Add new</Button>
             </GoalsHeader>
             <GoalsList>{goalComponents}</GoalsList>
         </GoalsContainer>

@@ -11,41 +11,45 @@ const StockListItem = (props) => {
     const currentPrice = props.stockData.delayedPrice.toFixed(2);
     const positive = stockValueChangePercent > 0;
 
+    const StockName = styled.span`
+        margin-right: 1rem;
+    `;
+
     const ValueContainer = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
+
         &:nth-child(3) {
-            margin-left: 2.5rem;
+            margin-left: 1.3rem;
         }
     `;
 
     const Value = styled(StockValue)`
-        font-size: 1.2rem;
+        font-size: 1rem;
         font-weight: bold;
         color: #252745;
     `;
 
+    const CurrentPriceValue = styled(Value)`
+        color: #252745 !important;
+    `;
+
     const Label = styled.span`
         font-size: 0.875rem;
-        color: #7c7c7c;
+        color: #717498 !important;
         font-weight: bold;
-        opacity: 0.7;
-
-        @media (min-width: 1440px) {
-            font-size: 1rem;
-        }
     `;
 
     return (
         <ListItem>
-            <span>{stockName}</span>
+            <StockName>{stockName}</StockName>
             <ValueContainer>
-                <Value positive={positive}>{stockValueChangePercent}</Value>
+                <Value positive={positive}>{stockValueChangePercent}%</Value>
                 <Label>Change</Label>
             </ValueContainer>
             <ValueContainer>
-                <Value positive={positive}>{currentPrice}</Value>
+                <CurrentPriceValue>{currentPrice}</CurrentPriceValue>
                 <Label>Current</Label>
             </ValueContainer>
         </ListItem>

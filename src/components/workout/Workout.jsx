@@ -95,7 +95,7 @@ const WorkoutCount = styled.span`
 
 const WorkoutLabel = styled.span`
     font-size: 0.875rem;
-    color: #7c7c7c;
+    color: #606389;
     font-weight: bold;
 
     @media (min-width: 1440px) {

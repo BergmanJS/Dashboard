@@ -34,7 +34,7 @@ const WorkoutName = styled.span`
 const WorkoutDate = styled.span`
     font-size: 0.875rem;
     font-weight: bold;
-    color: #7c7c7c;
+    color: #717498;
 `;
 
 const DeleteWorkoutButton = styled(Button)`
