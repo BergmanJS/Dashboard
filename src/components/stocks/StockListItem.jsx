@@ -23,6 +23,12 @@ const StockListItem = (props) => {
         &:nth-child(3) {
             margin-left: 1.3rem;
         }
+
+        @media (min-width: 1650px) {
+            &:nth-child(3) {
+                margin-left: 2.5rem;
+            }
+        }
     `;
 
     const Value = styled(StockValue)`
