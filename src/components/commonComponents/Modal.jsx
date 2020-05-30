@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 
 const Modal = styled.div`
     position: fixed;
-    top: 25%;
+    top: ${props => props.top || '15%' };
     left: 50%;
     margin-left: -10rem;
     padding: 1.3rem;
