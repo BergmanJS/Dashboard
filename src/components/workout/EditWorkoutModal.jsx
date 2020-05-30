@@ -55,6 +55,9 @@ const EditWorkoutModal = ({ setOpenEditWorkoutModal }) => {
     };
 
     useEffect(() => {
+        document.body.style.overflowY = setOpenEditWorkoutModal
+            ? 'hidden'
+            : 'initial';
         getWorkouts();
     }, []);
 
