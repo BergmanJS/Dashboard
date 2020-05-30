@@ -24,6 +24,12 @@ export default styled.button`
         padding: 0.625rem 1rem;
     }
 
+    &:disabled {
+        opacity: .5;
+        pointer-events: none;
+        cursor: auto;
+    }
+
     &:hover {
         background-color: #ff524d;
         transform: translateY(-2px);
