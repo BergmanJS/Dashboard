@@ -187,7 +187,7 @@ const getNHLOddsData = () => {
 };
 
 const getNHLData = () => {
-    const a = moment().subtract(1, 'day');
+    const a = moment().subtract(200, 'day');
     const currentDay = a.format().slice(0, 10);
 
     return fetch(
