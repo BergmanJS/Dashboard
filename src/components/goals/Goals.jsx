@@ -47,7 +47,6 @@ const Goals = () => {
     const [openModal, setOpenModal] = useState(false);
     const [inputValue, setInputValue] = useState('');
     const [goalComponents, setGoalComponents] = useState(null);
-
     const handleInputChange = (e) => {
         setInputValue(e.target.value);
     };
@@ -91,6 +90,7 @@ const Goals = () => {
         setGoalComponents(goalComponentsArray);
     };
 
+    document.body.style.overflowY = openModal ? 'hidden' : 'initial';
     useEffect(() => {
         getGoals();
     }, []);
@@ -98,7 +98,7 @@ const Goals = () => {
     return (
         <GoalsContainer backgroundColor="#252745">
             {openModal ? (
-                <Modal>
+                <Modal top={'25%'}>
                     <form onSubmit={handleSubmit}>
                         <Label>
                             New goal
@@ -109,7 +109,11 @@ const Goals = () => {
                                 onChange={(e) => handleInputChange(e)}
                             />
                         </Label>
-                        <Button type="submit" value="Set new goal">
+                        <Button
+                            disabled={inputValue === '' ? true : false}
+                            type="submit"
+                            value="Set new goal"
+                        >
                             Save
                         </Button>
                         <Button secondary onClick={(e) => handleModalClose(e)}>
