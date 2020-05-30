@@ -1,5 +1,5 @@
 import React from 'react';
-import { createGlobalStyle } from 'styled-components';
+import GlobalStyle from './components/commonComponents/GlobalStyle';
 import styled from 'styled-components';
 import LeftContentContainer from './components/LeftContentContainer';
 import CenterContentContainer from './components/CenterContentContainer';
@@ -27,28 +27,7 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-const GlobalStyle = createGlobalStyle`
-  
-  body {
-    font-family: "Quicksand", sans-serif;
-    margin: 0;
-    padding: 0;
 
-    * {
-        box-sizing: border-box;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-
-    /* #id-329-title {
-      display: none;
-    } */
-  }
-`;
 
 const AppContainer = styled.div`
     padding: 1rem;
@@ -82,7 +61,7 @@ const App = () => {
             <RightContentContainer>
                 <FavoriteLinks />
                 <Odds />
-                {/* <SportResults /> */}
+                <SportResults />
             </RightContentContainer>
         </AppContainer>
     );
