@@ -70,7 +70,7 @@ const WorkoutStaticContainer = styled.div`
     justify-content: space-around;
     margin-top: 1rem;
     margin-bottom: 1rem;
-    
+
     @media (min-width: 1440px) {
         padding: 0 2rem;
         justify-content: space-between;
@@ -111,9 +111,7 @@ const DatePickerContainer = styled.div`
     transition: 0.2s;
 `;
 
-
-
-const setWorkout = (workoutId, workout, week, date) => {
+const setWorkout = (workoutId, workout, week, workoutDate) => {
     firebase
         .database()
         .ref('workouts/' + workoutId)
@@ -121,7 +119,7 @@ const setWorkout = (workoutId, workout, week, date) => {
             {
                 workout: workout,
                 week: week,
-                date: date,
+                date: workoutDate,
             },
             (error) => {
                 if (error) {
@@ -144,29 +142,15 @@ const Workout = () => {
     };
 
     const getWeek = () => {
-        startDate.setHours(0, 0, 0, 0);
-        startDate.setDate(
-            startDate.getDate() + 3 - ((startDate.getDay() + 6) % 7)
-        );
-        const week1 = new Date(startDate.getFullYear(), 0, 4);
-
-        return (
-            1 +
-            Math.round(
-                ((startDate.getTime() - week1.getTime()) / 86400000 -
-                    3 +
-                    ((week1.getDay() + 6) % 7)) /
-                    7
-            )
-        );
+        return moment(startDate).isoWeek();
     };
 
     const handleSubmit = (e) => {
         const id = new Date().getTime();
         const week = getWeek();
-        const date = moment(startDate).format('l');
+        const workoutDate = moment(startDate).format('l');
 
-        setWorkout(id, inputValue, week, date);
+        setWorkout(id, inputValue, week, workoutDate);
         setInputValue('');
         setStartDate(new Date());
         setOpenModal(false);
@@ -179,6 +163,15 @@ const Workout = () => {
         setInputValue('');
         setStartDate(new Date());
         e.preventDefault();
+    };
+
+    const datePicker = () => {
+        return (
+            <WorkoutDatePicker
+                selected={startDate}
+                onChange={(date) => setStartDate(date)}
+            />
+        );
     };
 
     const getWorkouts = () => {
@@ -220,29 +213,27 @@ const Workout = () => {
         };
         setAllCounts(allCounts);
     };
-
-    const datePicker = () => {
-        return (
-            <WorkoutDatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
-            />
-        );
-    };
-
+    document.body.style.overflowY = openModal ? 'hidden' : 'initial';
     useEffect(() => {
         getWorkouts();
+        
     }, []);
-
+    
     return (
         <WorkoutContainter>
             <WorkoutBlockHeader>
                 <MainTitle>Workouts</MainTitle>
                 <div>
-                    <Button margin={'0 .4rem 0 0'} onClick={() => setOpenModal(true)}>
+                    <Button
+                        margin={'0 .4rem 0 0'}
+                        onClick={() => setOpenModal(true)}
+                    >
                         Add new
                     </Button>
-                    <Button secondary onClick={() => setOpenEditWorkoutModal(true)}>
+                    <Button
+                        secondary
+                        onClick={() => setOpenEditWorkoutModal(true)}
+                    >
                         Edit
                     </Button>
                 </div>
@@ -315,7 +306,7 @@ const Workout = () => {
                                 <WorkoutName>Yoga</WorkoutName>
                             </WorkoutChoice>
                         </WorkoutListContainer>
-                        <Button type="submit" value="Set new goal">
+                        <Button disabled={inputValue === '' ? true : false} type="submit">
                             Save
                         </Button>
                         <Button cancel onClick={(e) => handleModalClose(e)}>
