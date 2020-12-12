@@ -1,17 +1,17 @@
 import styled, { css } from 'styled-components';
 
 const ListItem = styled.li`
-    display: ${props => props.display || "flex"};
-    align-items: center;   
+    display: ${(props) => props.display || 'flex'};
+    align-items: ${(props) => props.alignItems || 'center'};
     font-size: 1rem;
     font-weight: bold;
-    margin-bottom: 1rem;
+    margin-bottom: ${(props) => props.marginBottom || '1rem'};
 
     span {
         flex-basis: 100%;
         flex-grow: 1;
         text-align: center;
-        color: ${props => props.color || "#252745"};
+        color: ${(props) => props.color || '#252745'};
 
         &:first-child {
             text-align: left;
